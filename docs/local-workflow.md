@@ -33,16 +33,18 @@ The project currently targets Hugo Extended 0.162.1. The Extended edition includ
 From the repository root, run:
 
 ```sh
-hugo server --buildDrafts
+hugo server --buildDrafts --environment development
 ```
 
 The shorthand form is:
 
 ```sh
-hugo server -D
+hugo server -D --environment development
 ```
 
 Hugo prints a local address, normally `http://localhost:1313/`. Open it in a browser.
+
+The explicit development environment loads `config/development/hugo.yaml`, which overrides the production `baseURL` with `http://localhost:1313/`. This keeps navigation, canonical URLs, images, and live-reload requests on the local server. Normal production builds continue to use `https://erli.xyz/`.
 
 The development server:
 
@@ -62,7 +64,7 @@ The development server normally builds the site in memory. It is for local previ
 To test on a phone or another computer on the same network:
 
 ```sh
-hugo server --buildDrafts --bind 0.0.0.0 --baseURL http://YOUR-LAN-IP:1313
+hugo server --buildDrafts --environment development --bind 0.0.0.0 --baseURL http://YOUR-LAN-IP:1313
 ```
 
 This exposes the development server to the local network. Do not expose it directly to the public internet.
@@ -219,12 +221,16 @@ The post title is already rendered as the level-one heading. A second level-one 
 
 Raw HTML in Markdown is disabled in the current configuration. Use Markdown or a supported Hugo shortcode where possible.
 
+### Interactive Plotly charts
+
+Erlidev includes a dedicated Plotly shortcode. See [Plotly charts](plotly-charts.md) for the supported JSON format, inline and page-bundle examples, accessibility requirements, and troubleshooting.
+
 ## 6. Preview drafts
 
 Keep the development server running while writing:
 
 ```sh
-hugo server --buildDrafts
+hugo server --buildDrafts --environment development
 ```
 
 Review the following before publishing:
@@ -336,7 +342,7 @@ Cloudflare Pages can create a preview deployment for the branch or pull request.
 Edit its `index.md`, preview it, and rebuild:
 
 ```sh
-hugo server --buildDrafts
+hugo server --buildDrafts --environment development
 hugo --gc --minify
 ```
 
@@ -429,7 +435,7 @@ git diff --submodule
 Test both the development site and production build:
 
 ```sh
-hugo server --buildDrafts
+hugo server --buildDrafts --environment development
 hugo --gc --minify
 ```
 

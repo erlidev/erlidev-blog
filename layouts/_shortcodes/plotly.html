@@ -1,0 +1,137 @@
+{{- $src := .Get "src" -}}
+{{- $inline := strings.TrimSpace (printf "%s" .Inner) -}}
+{{- if and $src $inline -}}
+  {{- errorf "plotly shortcode in %q: provide either src or inline JSON, not both" .Page.File.Path -}}
+{{- end -}}
+{{- if not (or $src $inline) -}}
+  {{- errorf "plotly shortcode in %q: provide src or inline JSON" .Page.File.Path -}}
+{{- end -}}
+
+{{- $raw := $inline -}}
+{{- if $src -}}
+  {{- with .Page.Resources.GetMatch $src -}}
+    {{- $raw = printf "%s" .Content -}}
+  {{- else -}}
+    {{- errorf "plotly shortcode in %q: page resource %q was not found" $.Page.File.Path $src -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $figure := transform.Unmarshal (dict "format" "json") $raw -}}
+{{- if not (reflect.IsMap $figure) -}}
+  {{- errorf "plotly shortcode in %q: chart definition must be a JSON object" .Page.File.Path -}}
+{{- end -}}
+{{- if not (index $figure "data") -}}
+  {{- errorf "plotly shortcode in %q: chart definition requires a data array" .Page.File.Path -}}
+{{- end -}}
+
+{{- $id := printf "plotly-%s-%d" .Page.File.UniqueID .Ordinal -}}
+{{- $alt := .Get "alt" | default "Interactive Plotly chart" -}}
+
+<figure class="plotly-figure">
+  <div id="{{ $id }}" class="plotly-chart" role="region" aria-label="{{ $alt }}"></div>
+  <script id="{{ $id }}-data" type="application/json">{{ jsonify $figure | safeJS }}</script>
+  <noscript><p class="plotly-fallback">This interactive chart requires JavaScript. The surrounding text describes its significant results.</p></noscript>
+</figure>
+<script>
+  if (!window.erlidevPlotly) {
+    window.erlidevPlotly = (function () {
+      var charts = new Map();
+      var ready = new Promise(function (resolve, reject) {
+        if (window.Plotly) {
+          resolve(window.Plotly);
+          return;
+        }
+        var script = document.createElement('script');
+        script.src = 'https://cdn.plot.ly/plotly-3.6.0.min.js';
+        script.charset = 'utf-8';
+        script.onload = function () { resolve(window.Plotly); };
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+
+      function color(styles, name, fallback) {
+        return styles.getPropertyValue(name).trim() || fallback;
+      }
+
+      function themedLayout(definition) {
+        var source = definition.layout || {};
+        var layout = Object.assign({ autosize: true }, source);
+        var styles = getComputedStyle(document.documentElement);
+        var background = color(styles, '--theme', '#ffffff');
+        var foreground = color(styles, '--primary', '#1d1e20');
+        var secondary = color(styles, '--secondary', '#6c6c6f');
+        var grid = color(styles, '--border', '#d5d5d6');
+
+        layout.paper_bgcolor = background;
+        layout.plot_bgcolor = background;
+        layout.font = Object.assign({}, source.font || {}, { color: foreground });
+
+        var axisNames = ['xaxis', 'yaxis'];
+        Object.keys(source).forEach(function (key) {
+          if (/^[xyz]axis\d*$/.test(key) && axisNames.indexOf(key) === -1) axisNames.push(key);
+        });
+        axisNames.forEach(function (key) {
+          layout[key] = Object.assign({}, source[key] || {}, {
+            color: foreground,
+            gridcolor: grid,
+            zerolinecolor: secondary
+          });
+        });
+
+        Object.keys(source).forEach(function (key) {
+          if (/^scene\d*$/.test(key)) {
+            var scene = source[key] || {};
+            layout[key] = Object.assign({}, scene, { bgcolor: background });
+            ['xaxis', 'yaxis', 'zaxis'].forEach(function (axis) {
+              layout[key][axis] = Object.assign({}, scene[axis] || {}, {
+                color: foreground,
+                gridcolor: grid,
+                zerolinecolor: secondary
+              });
+            });
+          }
+          if (/^polar\d*$/.test(key)) {
+            var polar = source[key] || {};
+            layout[key] = Object.assign({}, polar, { bgcolor: background });
+            ['angularaxis', 'radialaxis'].forEach(function (axis) {
+              layout[key][axis] = Object.assign({}, polar[axis] || {}, {
+                color: foreground,
+                gridcolor: grid
+              });
+            });
+          }
+        });
+
+        return layout;
+      }
+
+      function register(id) {
+        var chart = document.getElementById(id);
+        var definition = JSON.parse(document.getElementById(id + '-data').textContent);
+        var config = Object.assign({ displaylogo: false, responsive: true }, definition.config || {});
+        charts.set(id, { element: chart, definition: definition, config: config });
+        ready.then(function (Plotly) {
+          return Plotly.newPlot(chart, definition.data, themedLayout(definition), config);
+        }).catch(function () {
+          chart.textContent = 'The interactive chart could not be loaded.';
+        });
+      }
+
+      function refreshTheme() {
+        ready.then(function (Plotly) {
+          charts.forEach(function (chart) {
+            Plotly.react(chart.element, chart.definition.data, themedLayout(chart.definition), chart.config);
+          });
+        });
+      }
+
+      new MutationObserver(refreshTheme).observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme']
+      });
+
+      return { register: register };
+    }());
+  }
+  window.erlidevPlotly.register('{{ $id }}');
+</script>

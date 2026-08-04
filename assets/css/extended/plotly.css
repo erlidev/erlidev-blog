@@ -1,0 +1,13 @@
+.plotly-figure {
+  margin: 2rem 0;
+}
+
+.plotly-chart {
+  min-height: 24rem;
+  width: 100%;
+}
+
+.plotly-fallback {
+  color: var(--secondary);
+  font-style: italic;
+}

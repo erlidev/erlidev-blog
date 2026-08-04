@@ -26,7 +26,7 @@ See the [complete local workflow](docs/local-workflow.md) for detailed setup, wr
 Start the local server, including drafts:
 
 ```sh
-hugo server --buildDrafts
+hugo server --buildDrafts --environment development
 ```
 
 Create a post as a page bundle so its images can live beside it:
