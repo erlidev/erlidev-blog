@@ -1,0 +1,125 @@
+baseURL: https://erli.xyz/
+locale: en-US
+title: Erlidev
+theme: PaperMod
+copyright: "© Eric"
+enableRobotsTXT: true
+enableGitInfo: true
+
+pagination:
+  pagerSize: 10
+
+taxonomies:
+  category: categories
+  tag: tags
+  series: series
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+markup:
+  highlight:
+    codeFences: true
+    guessSyntax: true
+    lineNos: true
+    noClasses: false
+  goldmark:
+    renderer:
+      unsafe: false
+
+params:
+  env: production
+  author: Eric
+  description: Technical writing on AI, LLM benchmarks, software projects, and essays.
+  keywords:
+    - AI
+    - LLM benchmarks
+    - software engineering
+    - technical writing
+  defaultTheme: auto
+  disableThemeToggle: false
+  displayFullLangName: true
+
+  ShowReadingTime: true
+  ShowWordCount: true
+  ShowShareButtons: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowToc: true
+  TocOpen: false
+  ShowRssButtonInSectionTermList: true
+  UseHugoToc: true
+
+  homeInfoParams:
+    Title: "AI, software, and independent research"
+    Content: "LLM benchmarks, AI analysis and news, project notes, and personal essays."
+
+  socialIcons:
+    - name: rss
+      title: RSS feed
+      url: /index.xml
+
+  assets:
+    disableHLJS: true
+
+  cover:
+    linkFullImages: true
+    responsiveImages: true
+
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.4
+    minMatchCharLength: 2
+    keys:
+      - title
+      - permalink
+      - summary
+      - content
+
+menu:
+  main:
+    - identifier: posts
+      name: Posts
+      url: /posts/
+      weight: 10
+    - identifier: projects
+      name: Projects
+      url: /projects/
+      weight: 20
+    - identifier: archives
+      name: Archive
+      url: /archives/
+      weight: 30
+    - identifier: tags
+      name: Tags
+      url: /tags/
+      weight: 40
+    - identifier: search
+      name: Search
+      url: /search/
+      weight: 50
+    - identifier: about
+      name: About
+      url: /about/
+      weight: 60
+
+privacy:
+  x:
+    enableDNT: true
+  youtube:
+    privacyEnhanced: true
+
+services:
+  rss:
+    limit: 20
