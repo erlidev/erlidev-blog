@@ -1,10 +1,20 @@
 .plotly-figure {
   margin: 2rem 0;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .plotly-chart {
   min-height: 24rem;
+  max-width: 100%;
+  min-width: 0;
   width: 100%;
+}
+
+@media (max-width: 640px) {
+  .plotly-chart .modebar-container {
+    display: none;
+  }
 }
 
 .plotly-chart .updatemenu-button.plotly-update-menu-active .updatemenu-item-rect,

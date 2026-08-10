@@ -115,7 +115,7 @@ If JavaScript is disabled or Plotly's CDN cannot load, the page displays a messa
 
 ## Sizing and responsiveness
 
-Charts fill the available article width and have a default minimum height of 24rem. Plotly resizes them when the viewport changes.
+Charts fill the available article width and have a default minimum height of 24rem. Plotly resizes them when the viewport changes. At widths of 640 pixels or less, the integration moves legend entries below the plotting area, gives each entry a full row, and hides the mode bar. This preserves the data area and keeps long labels readable on phones. The full mode bar remains available on wider screens.
 
 Set an explicit height in the chart layout when a visualization needs more room:
 

@@ -73,7 +73,17 @@
         });
       }
 
-      function themedLayout(definition) {
+      function isCompact(chart) {
+        return chart.clientWidth > 0 && chart.clientWidth <= 640;
+      }
+
+      function legendItemCount(definition) {
+        return definition.data.filter(function (trace) {
+          return trace.showlegend !== false && trace.name;
+        }).length;
+      }
+
+      function themedLayout(definition, compact) {
         var source = definition.layout || {};
         var layout = Object.assign({ autosize: true }, source);
         var styles = getComputedStyle(document.documentElement);
@@ -178,20 +188,78 @@
           }
         });
 
+        if (compact) {
+          delete layout.width;
+
+          var sourceMargin = source.margin || {};
+          var itemCount = source.showlegend === false ? 0 : legendItemCount(definition);
+          var bottomMargin = itemCount ? Math.min(300, 64 + itemCount * 22) : (sourceMargin.b || 44);
+          var originalBottomMargin = sourceMargin.b || 0;
+
+          layout.margin = Object.assign({}, sourceMargin, {
+            b: Math.max(sourceMargin.b || 0, bottomMargin),
+            l: Math.min(sourceMargin.l || 48, 56),
+            r: Math.min(sourceMargin.r || 16, 24),
+            t: Math.max(sourceMargin.t || 0, 64)
+          });
+          layout.height = Math.max(source.height || 440, 440 + Math.max(0, bottomMargin - originalBottomMargin));
+
+          if (itemCount) {
+            layout.legend = Object.assign({}, layout.legend, {
+              entrywidth: 1,
+              entrywidthmode: 'fraction',
+              orientation: 'h',
+              x: 0,
+              xanchor: 'left',
+              y: -0.18,
+              yanchor: 'top'
+            });
+          }
+        }
+
         return layout;
       }
+
+      function redraw(Plotly, chart) {
+        return Plotly.react(
+          chart.element,
+          chart.definition.data,
+          themedLayout(chart.definition, chart.compact),
+          chart.config
+        ).then(function () { styleUpdateMenus(chart.element); });
+      }
+
+      var resizeObserver = window.ResizeObserver && new ResizeObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var chart = charts.get(entry.target.id);
+          if (!chart) return;
+
+          var compact = isCompact(chart.element);
+          if (compact === chart.compact) return;
+
+          chart.compact = compact;
+          ready.then(function (Plotly) { return redraw(Plotly, chart); });
+        });
+      });
 
       function register(id) {
         var chart = document.getElementById(id);
         var definition = JSON.parse(document.getElementById(id + '-data').textContent);
         var config = Object.assign({ displaylogo: false, responsive: true }, definition.config || {});
-        charts.set(id, { element: chart, definition: definition, config: config });
+        var registered = {
+          element: chart,
+          definition: definition,
+          config: config,
+          compact: isCompact(chart)
+        };
+        charts.set(id, registered);
         ready.then(function (Plotly) {
-          return Plotly.newPlot(chart, definition.data, themedLayout(definition), config).then(function () {
+          return Plotly.newPlot(chart, definition.data, themedLayout(definition, registered.compact), config).then(function () {
             styleUpdateMenus(chart);
             chart.on('plotly_buttonclicked', function () {
               window.requestAnimationFrame(function () { styleUpdateMenus(chart); });
             });
+            if (resizeObserver) resizeObserver.observe(chart);
           });
         }).catch(function () {
           chart.textContent = 'The interactive chart could not be loaded.';
@@ -201,8 +269,7 @@
       function refreshTheme() {
         ready.then(function (Plotly) {
           charts.forEach(function (chart) {
-            Plotly.react(chart.element, chart.definition.data, themedLayout(chart.definition), chart.config)
-              .then(function () { styleUpdateMenus(chart.element); });
+            redraw(Plotly, chart);
           });
         });
       }
