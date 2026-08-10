@@ -134,10 +134,11 @@ Avoid fixed widths. They interfere with responsive layouts on phones and narrow 
 Charts automatically follow PaperMod's active light or dark mode. The integration reads PaperMod's CSS variables and applies them to Plotly's:
 
 - Figure and plotting-area backgrounds
-- Text and legend labels
+- Titles, annotations, legend labels, and hover labels
 - Cartesian axis labels, grid lines, and zero lines
 - 3D scene backgrounds and axes
 - Polar chart backgrounds and axes
+- Update menus, sliders, and the mode bar
 
 Changing the site's theme toggle redraws every chart on the page without reloading it. Chart data and configuration remain registered with the page; Plotly may reset transient interactions such as zoom when it redraws.
 

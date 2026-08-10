@@ -53,18 +53,61 @@
         return styles.getPropertyValue(name).trim() || fallback;
       }
 
+      function themedFont(source, foreground) {
+        return Object.assign({}, source || {}, { color: foreground });
+      }
+
+      function styleUpdateMenus(chart) {
+        var definitions = (chart._fullLayout && chart._fullLayout.updatemenus || []).filter(function (menu) {
+          return menu.visible;
+        });
+        var groups = chart.querySelectorAll('g.updatemenu-header-group');
+
+        groups.forEach(function (group, menuIndex) {
+          var menu = definitions[menuIndex];
+          var active = menu && menu.showactive ? menu.active : -1;
+
+          group.querySelectorAll('g.updatemenu-button').forEach(function (button, buttonIndex) {
+            button.classList.toggle('plotly-update-menu-active', buttonIndex === active);
+          });
+        });
+      }
+
       function themedLayout(definition) {
         var source = definition.layout || {};
         var layout = Object.assign({ autosize: true }, source);
         var styles = getComputedStyle(document.documentElement);
         var background = color(styles, '--theme', '#ffffff');
+        var panel = color(styles, '--entry', '#ffffff');
         var foreground = color(styles, '--primary', '#1d1e20');
         var secondary = color(styles, '--secondary', '#6c6c6f');
         var grid = color(styles, '--border', '#d5d5d6');
+        var active = color(styles, '--tertiary', '#d6d6d6');
 
         layout.paper_bgcolor = background;
         layout.plot_bgcolor = background;
-        layout.font = Object.assign({}, source.font || {}, { color: foreground });
+        layout.font = themedFont(source.font, foreground);
+        layout.title = Object.assign({}, source.title || {}, {
+          font: themedFont(source.title && source.title.font, foreground)
+        });
+        layout.legend = Object.assign({}, source.legend || {}, {
+          bgcolor: panel,
+          bordercolor: grid,
+          font: themedFont(source.legend && source.legend.font, foreground),
+          title: Object.assign({}, source.legend && source.legend.title || {}, {
+            font: themedFont(source.legend && source.legend.title && source.legend.title.font, foreground)
+          })
+        });
+        layout.hoverlabel = Object.assign({}, source.hoverlabel || {}, {
+          bgcolor: panel,
+          bordercolor: grid,
+          font: themedFont(source.hoverlabel && source.hoverlabel.font, foreground)
+        });
+        layout.modebar = Object.assign({}, source.modebar || {}, {
+          activecolor: foreground,
+          bgcolor: background,
+          color: secondary
+        });
 
         var axisNames = ['xaxis', 'yaxis'];
         Object.keys(source).forEach(function (key) {
@@ -74,7 +117,38 @@
           layout[key] = Object.assign({}, source[key] || {}, {
             color: foreground,
             gridcolor: grid,
+            linecolor: grid,
             zerolinecolor: secondary
+          });
+          layout[key].title = Object.assign({}, source[key] && source[key].title || {}, {
+            font: themedFont(source[key] && source[key].title && source[key].title.font, foreground)
+          });
+        });
+
+        layout.annotations = (source.annotations || []).map(function (annotation) {
+          return Object.assign({}, annotation, {
+            arrowcolor: foreground,
+            bgcolor: panel,
+            bordercolor: grid,
+            font: themedFont(annotation.font, foreground)
+          });
+        });
+        layout.updatemenus = (source.updatemenus || []).map(function (menu) {
+          return Object.assign({}, menu, {
+            bgcolor: panel,
+            bordercolor: grid,
+            font: themedFont(menu.font, foreground)
+          });
+        });
+        layout.sliders = (source.sliders || []).map(function (slider) {
+          return Object.assign({}, slider, {
+            activebgcolor: active,
+            bgcolor: panel,
+            bordercolor: grid,
+            font: themedFont(slider.font, foreground),
+            currentvalue: Object.assign({}, slider.currentvalue || {}, {
+              font: themedFont(slider.currentvalue && slider.currentvalue.font, foreground)
+            })
           });
         });
 
@@ -86,6 +160,7 @@
               layout[key][axis] = Object.assign({}, scene[axis] || {}, {
                 color: foreground,
                 gridcolor: grid,
+                linecolor: grid,
                 zerolinecolor: secondary
               });
             });
@@ -96,7 +171,8 @@
             ['angularaxis', 'radialaxis'].forEach(function (axis) {
               layout[key][axis] = Object.assign({}, polar[axis] || {}, {
                 color: foreground,
-                gridcolor: grid
+                gridcolor: grid,
+                linecolor: grid
               });
             });
           }
@@ -111,7 +187,12 @@
         var config = Object.assign({ displaylogo: false, responsive: true }, definition.config || {});
         charts.set(id, { element: chart, definition: definition, config: config });
         ready.then(function (Plotly) {
-          return Plotly.newPlot(chart, definition.data, themedLayout(definition), config);
+          return Plotly.newPlot(chart, definition.data, themedLayout(definition), config).then(function () {
+            styleUpdateMenus(chart);
+            chart.on('plotly_buttonclicked', function () {
+              window.requestAnimationFrame(function () { styleUpdateMenus(chart); });
+            });
+          });
         }).catch(function () {
           chart.textContent = 'The interactive chart could not be loaded.';
         });
@@ -120,7 +201,8 @@
       function refreshTheme() {
         ready.then(function (Plotly) {
           charts.forEach(function (chart) {
-            Plotly.react(chart.element, chart.definition.data, themedLayout(chart.definition), chart.config);
+            Plotly.react(chart.element, chart.definition.data, themedLayout(chart.definition), chart.config)
+              .then(function () { styleUpdateMenus(chart.element); });
           });
         });
       }
