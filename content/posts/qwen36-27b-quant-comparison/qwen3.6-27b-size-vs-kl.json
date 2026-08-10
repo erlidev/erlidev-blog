@@ -426,7 +426,7 @@
       "type": "linear"
     },
     "title": {
-      "text": "Qwen3.6-27B - Size vs KL divergence",
+      "text": "Qwen3.6-27B",
       "font": {
         "size": 13,
         "color": "#dbe4f4"
