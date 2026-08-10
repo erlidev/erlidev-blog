@@ -96,7 +96,7 @@ I created my own dataset for the KL measurements, which ended up being 100 struc
 
 > The dataset used heavily determines the overall KLD measured by these benchmarks. The low KLD numbers you may be used to seeing in other benchmarks are due to datasets like Wikipedia at low context being used. I did do runs on longer prompts from 10k to 30k tokens, but I found that it simply increased the overall KLD without much relative difference between quants.
 
-Quantized checkpoints ran as shipped, including any declared compute dtype, activation quantization, or KV-cache scheme, in order to measure the true fidelity of each quant recipe.
+Quantized checkpoints ran without changes, including any declared compute dtype, activation quantization, or KV-cache scheme, in order to measure the true fidelity of each quant recipe.
 
 Top-1 agreement is the fraction of positions at which the quantized model and its reference assign the highest probability to the same token.
 
