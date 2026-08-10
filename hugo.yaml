@@ -76,6 +76,14 @@ params:
 
   assets:
     disableHLJS: true
+    favicon: /images/favicon.png
+    favicon16x16: /images/favicon-16x16.png
+    favicon32x32: /images/favicon-32x32.png
+    apple_touch_icon: /images/apple-touch-icon.png
+
+  label:
+    icon: images/pfp.jpg
+    iconHeight: 30
 
   cover:
     linkFullImages: true
