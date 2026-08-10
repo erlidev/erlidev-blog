@@ -1,0 +1,479 @@
+{
+  "data": [
+    {
+      "type": "scatter",
+      "mode": "markers",
+      "name": "Lorbus / AutoRound W4A16 g128",
+      "x": [
+        16.59265375137329
+      ],
+      "y": [
+        0.3831256672418545
+      ],
+      "hovertext": [
+        "<b>AutoRound_INT4</b><br>Lorbus \u00b7 AutoRound INT4<br>Activations: not quantized<br>Engine: vLLM<br>KL divergence: 0.3831 (95% CI: 0.3358\u20130.4296)<br>Top-1 agreement: 89.48%<br>Loaded weights: 16.59 GiB"
+      ],
+      "hovertemplate": "%{hovertext}<extra></extra>",
+      "marker": {
+        "color": "#3987e5",
+        "size": 10,
+        "symbol": "diamond",
+        "line": {
+          "color": "rgba(14, 18, 25, 0.9)",
+          "width": 1
+        }
+      },
+      "error_y": {
+        "type": "data",
+        "symmetric": false,
+        "array": [
+          0.04651464963815677
+        ],
+        "arrayminus": [
+          0.04734893492340969
+        ],
+        "color": "#3987e5",
+        "thickness": 1,
+        "width": 3
+      }
+    },
+    {
+      "type": "scatter",
+      "mode": "markers",
+      "name": "Qwen / dynamic W8A8 FP8",
+      "x": [
+        27.57208599895239
+      ],
+      "y": [
+        0.12443626154751337
+      ],
+      "hovertext": [
+        "<b>qwen_FP8</b><br>Qwen \u00b7 FP8<br>Activations: quantized (FP8)<br>Engine: vLLM<br>KL divergence: 0.1244 (95% CI: 0.1039\u20130.1461)<br>Top-1 agreement: 94.74%<br>Loaded weights: 27.57 GiB"
+      ],
+      "hovertemplate": "%{hovertext}<extra></extra>",
+      "marker": {
+        "color": "#199e70",
+        "size": 10,
+        "symbol": "square",
+        "line": {
+          "color": "rgba(14, 18, 25, 0.9)",
+          "width": 1
+        }
+      },
+      "error_y": {
+        "type": "data",
+        "symmetric": false,
+        "array": [
+          0.02164615109249167
+        ],
+        "arrayminus": [
+          0.02052625329643891
+        ],
+        "color": "#199e70",
+        "thickness": 1,
+        "width": 3
+      }
+    },
+    {
+      "type": "scatter",
+      "mode": "markers",
+      "name": "bartowski / GGUF",
+      "x": [
+        12.602420806884766,
+        17.618289947509766,
+        22.612796783447266,
+        27.106510162353516
+      ],
+      "y": [
+        0.5160172938170097,
+        0.22180502870471255,
+        0.05652187599465364,
+        0.040211422375160684
+      ],
+      "hovertext": [
+        "<b>bart_IQ3_XS</b><br>Bartowski \u00b7 GGUF IQ3<br>Activations: not quantized<br>Engine: llama.cpp<br>KL divergence: 0.5160 (95% CI: 0.4601\u20130.5713)<br>Top-1 agreement: 86.46%<br>Loaded weights: 12.60 GiB",
+        "<b>bart_Q4_K_L</b><br>Bartowski \u00b7 GGUF Q4<br>Activations: not quantized<br>Engine: llama.cpp<br>KL divergence: 0.2218 (95% CI: 0.1905\u20130.2531)<br>Top-1 agreement: 92.41%<br>Loaded weights: 17.62 GiB",
+        "<b>bart_Q6_K_L</b><br>Bartowski \u00b7 GGUF Q6<br>Activations: not quantized<br>Engine: llama.cpp<br>KL divergence: 0.0565 (95% CI: 0.0463\u20130.0669)<br>Top-1 agreement: 96.62%<br>Loaded weights: 22.61 GiB",
+        "<b>bart_Q8_0</b><br>Bartowski \u00b7 GGUF Q8<br>Activations: not quantized<br>Engine: llama.cpp<br>KL divergence: 0.0402 (95% CI: 0.0324\u20130.0486)<br>Top-1 agreement: 97.37%<br>Loaded weights: 27.11 GiB"
+      ],
+      "hovertemplate": "%{hovertext}<extra></extra>",
+      "marker": {
+        "color": "#c98500",
+        "size": 10,
+        "symbol": "triangle-up",
+        "line": {
+          "color": "rgba(14, 18, 25, 0.9)",
+          "width": 1
+        }
+      },
+      "error_y": {
+        "type": "data",
+        "symmetric": false,
+        "array": [
+          0.055330255175774945,
+          0.0313019785071951,
+          0.01034708898498015,
+          0.008358447778059844
+        ],
+        "arrayminus": [
+          0.055900663425203834,
+          0.031303606534968886,
+          0.01020645066958617,
+          0.007841256104443903
+        ],
+        "color": "#c98500",
+        "thickness": 1,
+        "width": 3
+      }
+    },
+    {
+      "type": "scatter",
+      "mode": "markers",
+      "name": "cyankiwi / AWQ W4A16 g32",
+      "x": [
+        18.008814334869385
+      ],
+      "y": [
+        0.2775684714858885
+      ],
+      "hovertext": [
+        "<b>AWQ_INT4</b><br>cyankiwi \u00b7 AWQ INT4<br>Activations: not quantized<br>Engine: vLLM<br>KL divergence: 0.2776 (95% CI: 0.2408\u20130.3145)<br>Top-1 agreement: 91.27%<br>Loaded weights: 18.01 GiB"
+      ],
+      "hovertemplate": "%{hovertext}<extra></extra>",
+      "marker": {
+        "color": "#008300",
+        "size": 10,
+        "symbol": "circle",
+        "line": {
+          "color": "rgba(14, 18, 25, 0.9)",
+          "width": 1
+        }
+      },
+      "error_y": {
+        "type": "data",
+        "symmetric": false,
+        "array": [
+          0.03692770586219568
+        ],
+        "arrayminus": [
+          0.03680555738014518
+        ],
+        "color": "#008300",
+        "thickness": 1,
+        "width": 3
+      }
+    },
+    {
+      "type": "scatter",
+      "mode": "markers",
+      "name": "michaelw9999 / mixed NVFP4 GGUF",
+      "x": [
+        15.071275249123573
+      ],
+      "y": [
+        0.40145812837135847
+      ],
+      "hovertext": [
+        "<b>nvfp4_MTP_gguf</b><br>michaelw9999 \u00b7 mixed GGUF<br>Activations: not quantized<br>Engine: llama.cpp<br>KL divergence: 0.4015 (95% CI: 0.3511\u20130.4499)<br>Top-1 agreement: 89.26%<br>Loaded weights: 15.07 GiB"
+      ],
+      "hovertemplate": "%{hovertext}<extra></extra>",
+      "marker": {
+        "color": "#9085e9",
+        "size": 10,
+        "symbol": "x",
+        "line": {
+          "color": "rgba(14, 18, 25, 0.9)",
+          "width": 1
+        }
+      },
+      "error_y": {
+        "type": "data",
+        "symmetric": false,
+        "array": [
+          0.04844599701357205
+        ],
+        "arrayminus": [
+          0.05032602015973181
+        ],
+        "color": "#9085e9",
+        "thickness": 1,
+        "width": 3
+      }
+    },
+    {
+      "type": "scatter",
+      "mode": "markers",
+      "name": "NVIDIA / NVFP4 W4A16 + FP8 W8A8",
+      "x": [
+        18.892086029052734
+      ],
+      "y": [
+        0.2807478754988251
+      ],
+      "hovertext": [
+        "<b>NVFP4</b><br>NVIDIA \u00b7 mixed NVFP4 and FP8<br>Activations: partly quantized (FP8)<br>Engine: vLLM<br>KL divergence: 0.2807 (95% CI: 0.2430\u20130.3178)<br>Top-1 agreement: 91.00%<br>Loaded weights: 18.89 GiB"
+      ],
+      "hovertemplate": "%{hovertext}<extra></extra>",
+      "marker": {
+        "color": "#e66767",
+        "size": 10,
+        "symbol": "cross",
+        "line": {
+          "color": "rgba(14, 18, 25, 0.9)",
+          "width": 1
+        }
+      },
+      "error_y": {
+        "type": "data",
+        "symmetric": false,
+        "array": [
+          0.037007814515151116
+        ],
+        "arrayminus": [
+          0.037755400341993095
+        ],
+        "color": "#e66767",
+        "thickness": 1,
+        "width": 3
+      }
+    },
+    {
+      "type": "scatter",
+      "mode": "markers",
+      "name": "sakamakismile / NVFP4 W4A4 g16",
+      "x": [
+        17.62389612197876
+      ],
+      "y": [
+        0.5635765164932752
+      ],
+      "hovertext": [
+        "<b>NVFP4_Text_MTP</b><br>sakamakismile \u00b7 NVFP4<br>Activations: quantized (NVFP4)<br>Engine: vLLM<br>KL divergence: 0.5636 (95% CI: 0.4987\u20130.6249)<br>Top-1 agreement: 86.27%<br>Loaded weights: 17.62 GiB"
+      ],
+      "hovertemplate": "%{hovertext}<extra></extra>",
+      "marker": {
+        "color": "#d55181",
+        "size": 10,
+        "symbol": "triangle-down",
+        "line": {
+          "color": "rgba(14, 18, 25, 0.9)",
+          "width": 1
+        }
+      },
+      "error_y": {
+        "type": "data",
+        "symmetric": false,
+        "array": [
+          0.06136383334725626
+        ],
+        "arrayminus": [
+          0.06492116559143524
+        ],
+        "color": "#d55181",
+        "thickness": 1,
+        "width": 3
+      }
+    },
+    {
+      "type": "scatter",
+      "mode": "markers",
+      "name": "unsloth / GGUF",
+      "x": [
+        11.355262756347656,
+        16.668907165527344,
+        18.94281005859375,
+        24.218517303466797,
+        33.309207916259766
+      ],
+      "y": [
+        0.593089366380314,
+        0.2272677141244486,
+        0.12646635191410865,
+        0.052581941073504064,
+        0.0337400790859178
+      ],
+      "hovertext": [
+        "<b>uns_UD_IQ3_XXS</b><br>Unsloth \u00b7 GGUF IQ3<br>Activations: not quantized<br>Engine: llama.cpp<br>KL divergence: 0.5931 (95% CI: 0.5284\u20130.6572)<br>Top-1 agreement: 85.35%<br>Loaded weights: 11.36 GiB",
+        "<b>uns_UD_Q4_K_XL</b><br>Unsloth \u00b7 GGUF Q4<br>Activations: not quantized<br>Engine: llama.cpp<br>KL divergence: 0.2273 (95% CI: 0.1960\u20130.2581)<br>Top-1 agreement: 92.46%<br>Loaded weights: 16.67 GiB",
+        "<b>uns_UD_Q5_K_XL</b><br>Unsloth \u00b7 GGUF Q5<br>Activations: not quantized<br>Engine: llama.cpp<br>KL divergence: 0.1265 (95% CI: 0.1060\u20130.1475)<br>Top-1 agreement: 94.60%<br>Loaded weights: 18.94 GiB",
+        "<b>uns_UD_Q6_K_XL</b><br>Unsloth \u00b7 GGUF Q6<br>Activations: not quantized<br>Engine: llama.cpp<br>KL divergence: 0.0526 (95% CI: 0.0435\u20130.0623)<br>Top-1 agreement: 96.75%<br>Loaded weights: 24.22 GiB",
+        "<b>uns_UD_Q8_K_XL</b><br>Unsloth \u00b7 GGUF Q8<br>Activations: not quantized<br>Engine: llama.cpp<br>KL divergence: 0.0337 (95% CI: 0.0267\u20130.0413)<br>Top-1 agreement: 97.45%<br>Loaded weights: 33.31 GiB"
+      ],
+      "hovertemplate": "%{hovertext}<extra></extra>",
+      "marker": {
+        "color": "#d95926",
+        "size": 10,
+        "symbol": "triangle-up",
+        "line": {
+          "color": "rgba(14, 18, 25, 0.9)",
+          "width": 1
+        }
+      },
+      "error_y": {
+        "type": "data",
+        "symmetric": false,
+        "array": [
+          0.06412947099987032,
+          0.030812400686105496,
+          0.02098474537959097,
+          0.009688873263366475,
+          0.0075973907184595235
+        ],
+        "arrayminus": [
+          0.06472602292709084,
+          0.03130231807587783,
+          0.020504450771878985,
+          0.009107594443145843,
+          0.007062977986769789
+        ],
+        "color": "#d95926",
+        "thickness": 1,
+        "width": 3
+      }
+    },
+    {
+      "type": "scatter",
+      "mode": "markers",
+      "name": "Unsloth / NVFP4 W4A4 + FP8 W8A8",
+      "x": [
+        20.28865982219577
+      ],
+      "y": [
+        0.39116641782110206
+      ],
+      "hovertext": [
+        "<b>uns_NVFP4</b><br>Unsloth \u00b7 mixed NVFP4 and FP8<br>Activations: quantized (NVFP4 and FP8)<br>Engine: vLLM<br>KL divergence: 0.3912 (95% CI: 0.3439\u20130.4376)<br>Top-1 agreement: 89.51%<br>Loaded weights: 20.29 GiB"
+      ],
+      "hovertemplate": "%{hovertext}<extra></extra>",
+      "marker": {
+        "color": "#17becf",
+        "size": 10,
+        "symbol": "triangle-down",
+        "line": {
+          "color": "rgba(14, 18, 25, 0.9)",
+          "width": 1
+        }
+      },
+      "error_y": {
+        "type": "data",
+        "symmetric": false,
+        "array": [
+          0.04642065951731783
+        ],
+        "arrayminus": [
+          0.047265240653286966
+        ],
+        "color": "#17becf",
+        "thickness": 1,
+        "width": 3
+      }
+    }
+  ],
+  "layout": {
+    "paper_bgcolor": "rgba(0,0,0,0)",
+    "plot_bgcolor": "rgba(0,0,0,0)",
+    "font": {
+      "family": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+      "size": 12,
+      "color": "#8b98b3"
+    },
+    "margin": {
+      "l": 56,
+      "r": 16,
+      "t": 42,
+      "b": 44
+    },
+    "hovermode": "closest",
+    "hoverlabel": {
+      "bgcolor": "#131926",
+      "bordercolor": "#232e44",
+      "font": {
+        "family": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+        "size": 12,
+        "color": "#dbe4f4"
+      }
+    },
+    "legend": {
+      "bgcolor": "rgba(19, 25, 38, 0.72)",
+      "borderwidth": 0,
+      "font": {
+        "size": 11.5,
+        "color": "#8b98b3"
+      }
+    },
+    "xaxis": {
+      "gridcolor": "rgba(35, 46, 68, 0.55)",
+      "linecolor": "#232e44",
+      "zeroline": false,
+      "title": {
+        "text": "loaded weights (GiB)",
+        "font": {
+          "size": 11.5
+        }
+      }
+    },
+    "yaxis": {
+      "gridcolor": "rgba(35, 46, 68, 0.55)",
+      "linecolor": "#232e44",
+      "zeroline": false,
+      "title": {
+        "text": "KL divergence (nats)",
+        "font": {
+          "size": 11.5
+        }
+      },
+      "rangemode": "tozero",
+      "type": "linear"
+    },
+    "title": {
+      "text": "Qwen3.6-27B \u2014 Size vs KL divergence",
+      "font": {
+        "size": 13,
+        "color": "#dbe4f4"
+      },
+      "x": 0,
+      "xanchor": "left"
+    },
+    "shapes": [],
+    "annotations": [],
+    "height": 440,
+    "updatemenus": [
+      {
+        "type": "buttons",
+        "direction": "right",
+        "x": 1,
+        "xanchor": "right",
+        "y": 1.14,
+        "yanchor": "top",
+        "active": 0,
+        "showactive": true,
+        "bgcolor": "rgba(19, 25, 38, 0.72)",
+        "bordercolor": "#232e44",
+        "font": {
+          "size": 10.5,
+          "color": "#8b98b3"
+        },
+        "buttons": [
+          {
+            "label": "linear",
+            "method": "relayout",
+            "args": [
+              {
+                "yaxis.type": "linear"
+              }
+            ]
+          },
+          {
+            "label": "log",
+            "method": "relayout",
+            "args": [
+              {
+                "yaxis.type": "log"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

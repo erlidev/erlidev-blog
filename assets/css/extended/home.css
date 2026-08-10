@@ -1,0 +1,76 @@
+.home-info {
+    min-height: 0;
+    padding: clamp(2rem, 6vw, 4.5rem) 0;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.home-kicker {
+    margin-bottom: 0.75rem;
+    color: var(--secondary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.first-entry.home-info .entry-header h1 {
+    max-width: 14ch;
+    font-size: clamp(2.4rem, 8vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.045em;
+}
+
+.home-info .entry-content {
+    max-width: 42rem;
+    margin-top: 1.5rem;
+    font-size: 1.05rem;
+    line-height: 1.75;
+}
+
+.home-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1.75rem 0 0.75rem;
+}
+
+.home-action {
+    padding: 0.65rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.home-action:hover {
+    border-color: var(--secondary);
+}
+
+.home-action-primary {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: var(--theme);
+}
+
+.home-action-primary:hover {
+    border-color: var(--primary);
+    opacity: 0.88;
+}
+
+.home-info .entry-footer {
+    margin-top: 0.25rem;
+}
+
+.home-section-title {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+}
+
+@media (max-width: 480px) {
+    .home-action {
+        width: 100%;
+        text-align: center;
+    }
+}

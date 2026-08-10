@@ -1,0 +1,27 @@
+{{- with site.Params.homeInfoParams }}
+<article class="first-entry home-info">
+    <p class="home-kicker">Models, measurements, and thoughts</p>
+    <header class="entry-header">
+        <h1>{{ .Title | markdownify }}</h1>
+    </header>
+    <div class="entry-content md-content">
+        {{ $opts := dict "display" "block" }}
+        {{ .Content | $.Page.RenderString $opts }}
+    </div>
+    <div class="home-actions">
+        {{- with .PrimaryAction }}
+        <a class="home-action home-action-primary" href="{{ .URL | relURL }}">{{ .Name }}</a>
+        {{- end }}
+        {{- with .SecondaryAction }}
+        <a class="home-action" href="{{ .URL | relURL }}">{{ .Name }}</a>
+        {{- end }}
+    </div>
+    <footer class="entry-footer">
+        {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
+    </footer>
+</article>
+{{- $posts := where site.RegularPages "Section" "posts" }}
+{{- if gt (len $posts) 0 }}
+<h2 class="home-section-title">Latest writing</h2>
+{{- end }}
+{{- end }}

@@ -2,7 +2,7 @@ baseURL: https://erli.xyz/
 locale: en-US
 title: Erlidev
 theme: PaperMod
-copyright: "© Eric"
+copyright: "© Erlidev"
 enableRobotsTXT: true
 enableGitInfo: true
 
@@ -36,8 +36,8 @@ markup:
 
 params:
   env: production
-  author: Eric
-  description: Technical writing on AI, LLM benchmarks, software projects, and essays.
+  author: Erlidev
+  description: Independent notes on AI, LLM evaluation, software engineering, and the systems behind them.
   keywords:
     - AI
     - LLM benchmarks
@@ -59,10 +59,17 @@ params:
   UseHugoToc: true
 
   homeInfoParams:
-    Title: "AI, software, and independent research"
-    Content: "LLM benchmarks, AI analysis and news, project notes, and personal essays."
+    Title: "AI Field Notes"
+    Content: |
+      Hi, I'm Eric. I've been working with AI since the Llama 1 days and I'm here to share what I know. I post my research, projects, and essays here.
+    PrimaryAction:
+      Name: Read the latest posts
+      URL: /posts/
 
   socialIcons:
+    - name: github
+      title: GitHub profile
+      url: https://github.com/erlidev
     - name: rss
       title: RSS feed
       url: /index.xml
@@ -93,10 +100,6 @@ menu:
       name: Posts
       url: /posts/
       weight: 10
-    - identifier: projects
-      name: Projects
-      url: /projects/
-      weight: 20
     - identifier: archives
       name: Archive
       url: /archives/
@@ -109,11 +112,6 @@ menu:
       name: Search
       url: /search/
       weight: 50
-    - identifier: about
-      name: About
-      url: /about/
-      weight: 60
-
 privacy:
   x:
     enableDNT: true
