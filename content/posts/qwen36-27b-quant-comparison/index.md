@@ -83,6 +83,8 @@ Both engines compute exact full-vocabulary softmax probabilities, but only the t
 
 The mean reference tail mass outside the top 200 was 0.0025 for both engines in this run. Top-1 agreement does not depend on the tail approximation and provides a complementary check.
 
+> Top-1 agreement is the fraction of positions at which the quantized model and its reference assign the highest probability to the same token.
+
 ## Methodology
 
 Each quant was measured against a reference model in its own engine:
@@ -97,8 +99,6 @@ I created my own dataset for the KL measurements, which ended up being 100 struc
 > The dataset used heavily determines the overall KLD measured by these benchmarks. The low KLD numbers you may be used to seeing in other benchmarks are due to datasets like Wikipedia at low context being used. I did do runs on longer prompts from 10k to 30k tokens, but I found that it simply increased the overall KLD without much relative difference between quants.
 
 Quantized checkpoints ran without changes, including any declared compute dtype, activation quantization, or KV-cache scheme, in order to measure the true fidelity of each quant recipe.
-
-Top-1 agreement is the fraction of positions at which the quantized model and its reference assign the highest probability to the same token.
 
 The size measurement includes MTP/NextN layers and excludes KV/recurrent caches, activations, workspaces, CUDA graphs, runtime context, and unloaded multimodal components. It is not total serving memory. Take these measurements with a grain of salt, as they'll vary in actual deployment depending on your configuration.
 
